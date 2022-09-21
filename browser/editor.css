@@ -23,3 +23,14 @@
       opacity: 1;
     }
 }
+.NEditor .addtext {
+    font-family: inherit;
+    font-size: inherit;
+    font: inherit;
+    height: inherit;
+    outline: none;
+    border: none;
+    width: 1px;
+    padding: 0px;
+    background: none;
+}
