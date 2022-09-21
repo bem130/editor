@@ -24,7 +24,13 @@ class NEditorUI {
         {
             for (let i=0;i<this.editor.lines.length;i++) {
                 let lines = document.createElement("div");
-                lines.innerText = this.editor.lines[i];
+                lines.classList.add("line");
+                for (let j=0;j<this.editor.lines[i].length;j++) {
+                    let chars = document.createElement("span");
+                    chars.classList.add("char");
+                    chars.innerText = this.editor.lines[i][j];
+                    lines.appendChild(chars);
+                }
                 editarea.appendChild(lines);
                 console.log(this.editor.lines[i]);
             }
