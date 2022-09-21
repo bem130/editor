@@ -1,0 +1,10 @@
+.NEditor {
+    height: 200px;
+    width: 300px;
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(160, 213, 140);
+}
+.NEditor .editarea {
+    padding: 10px;
+}
