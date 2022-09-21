@@ -1,7 +1,7 @@
 class NEditor {
     constructor() {
         this.lines = ["Hello World!","This is a editor for web-apps"];
-        this.cursor = [0,0];
+        this.cursor = [1,5];
     }
     setText(text) {}
     addText(text) {}
@@ -14,6 +14,7 @@ class NEditorUI {
         this.editor = new NEditor();
         this.ui = editorarea;
         this.initalui();
+        this.selector();
     }
     initalui() {
         this.ui.classList.add("NEditor");
@@ -45,6 +46,10 @@ class NEditorUI {
             infobar.appendChild(infocursor);
         }
         this.ui.appendChild(infobar);
+    }
+    selector() {
+        let char = document.querySelector(`.NEditor > div.editarea > div:nth-child(${this.editor.cursor[0]}) > span:nth-child(${this.editor.cursor[1]})`)
+        console.log(char);
     }
     setui() {}
 }
