@@ -48,7 +48,12 @@ class NEditorUI {
         this.ui.appendChild(infobar);
     }
     selector() {
-        let char = document.querySelector(`.NEditor > div.editarea > div:nth-child(${this.editor.cursor[0]}) > span:nth-child(${this.editor.cursor[1]})`)
+        let char = document.querySelector(`.NEditor > div.editarea > div:nth-child(${this.editor.cursor[0]}) > span:nth-child(${this.editor.cursor[1]})`);
+        {
+            let cursor = document.createElement("div");
+            cursor.classList.add("cursor");
+            char.after(cursor);
+        }
         console.log(char);
     }
     setui() {}

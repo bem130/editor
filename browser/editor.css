@@ -8,3 +8,18 @@
 .NEditor .editarea {
     padding: 10px;
 }
+.NEditor .cursor {
+    animation: cursor 1s linear infinite;
+    background-color: black;
+    display: inline-block;
+    width: 1px;
+    height: 13px;
+}
+@keyframes cursor {
+    0%,5%,65%,100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+}
