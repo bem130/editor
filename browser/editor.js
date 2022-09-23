@@ -2,19 +2,18 @@ class NEditor {
     constructor() {
         this.lines = [""];
         this.cursor = [1,0];
-        this.composing = "";
-        this.composingcursor = 0;
     }
     setText(text) {}
-    composingText(text) {
-        this.composingtext = text;
-        this.composingcursor = text.length;
-    }
     addText(text) {
         this.lines[this.cursor[0]-1] = this.lines[this.cursor[0]-1].slice(0,this.cursor[1])+text+this.lines[this.cursor[0]-1].slice(this.cursor[1]);
         this.cursor[1]++;
     }
-    deleteText(text) {}
+    deleteText() {
+        if (this.cursor[1]>0) {
+            this.lines[this.cursor[0]-1] = this.lines[this.cursor[0]-1].slice(0,this.cursor[1]-1)+this.lines[this.cursor[0]-1].slice(this.cursor[1]);
+            this.cursor[1]--;
+        }
+    }
     moveCursor(x,y) {}
     selectText(text) {}
 }
@@ -38,6 +37,7 @@ class NEditorUI {
         this.addtextarea.classList.add("addtext");
         //this.addtextarea.onchange = this.addtext.bind(this);
         this.addtextarea.oninput = this.addtext.bind(this);
+        this.addtextarea.onkeydown = this.keyevent.bind(this);
         // under bar
         let infobar = document.createElement("div");
         infobar.classList.add("infobar");
@@ -52,12 +52,10 @@ class NEditorUI {
     }
     addtext(e) {
         if( e.isComposing ) {
-          console.log("未確定",e.target.value);
-          this.composingtext.innerText = e.target.value;
-          return
+            this.composingtext.innerText = e.target.value;
+            return;
         }
         else {
-            console.log("確定");
             for (let i=0;i<e.target.value.length;i++) {
                 this.editor.addText(e.target.value[i]);
             }
@@ -65,6 +63,12 @@ class NEditorUI {
             this.composingtext.innerText = "";
         }
         this.updatelines();
+    }
+    keyevent(e) {
+        if (e.keyCode==8) {
+            this.editor.deleteText();
+            this.updatelines();
+        }
     }
     updatelines() {
         this.editarea.innerHTML = "";

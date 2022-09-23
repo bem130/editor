@@ -1,7 +1,7 @@
 .NEditor {
     font-family: monospace;
-    height: 200px;
-    width: 300px;
+    height: 300px;
+    width: 500px;
     margin: 0px;
     padding: 0px;
     background-color: rgb(47, 51, 81);
@@ -10,25 +10,27 @@
 .NEditor .editarea {
     padding: 10px;
 }
-@keyframes cursor {
-    0%,5%,65%,100% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 1;
-    }
-}
 .NEditor .addtext {
+    animation: cursor 1s linear infinite;
     caret-color: transparent;
     font-family: inherit;
     font-size: inherit;
     font: inherit;
+    color: transparent;
     outline: none;
     border: none;
-    background: red;
+    background: white;
     resize: none;
     overflow: hidden;
-    width: 10px;
+    width: 2px;
     padding: 0px;
     height: 15px;
+}
+@keyframes cursor {
+    0%,10%,65%,100% {
+        opacity: 0;
+    }
+    20%,60% {
+        opacity: 1;
+    }
 }
