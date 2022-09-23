@@ -17,7 +17,9 @@ class NEditor {
     moveCursor(c) {
         if (this.cursor+c>0&&this.cursor+c<this.text.length+2) {
             this.cursor+=c;
+            return true;
         }
+        return false;
     }
     selectText(text) {}
 }
@@ -75,6 +77,12 @@ class NEditorUI {
             this.editor.deleteText();
             this.updatelines();
         }
+        if (e.keyCode==46) {
+            if (this.editor.moveCursor(1)) {
+                this.editor.deleteText();
+                this.updatelines();
+            }
+        }
         if (e.keyCode==37) {
             this.editor.moveCursor(-1);
             this.updatelines();
@@ -111,6 +119,7 @@ class NEditorUI {
         }
         this.infocursor.innerText = this.editor.cursor;
         this.addtextarea.focus();
+        console.log("updated")
     }
     moveselector() {
         let chars = document.querySelector(`.NEditor > div.editarea span:nth-child(${this.editor.cursor-1})`);
