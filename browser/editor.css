@@ -1,19 +1,14 @@
 .NEditor {
+    font-family: monospace;
     height: 200px;
     width: 300px;
     margin: 0px;
     padding: 0px;
-    background-color: rgb(160, 213, 140);
+    background-color: rgb(47, 51, 81);
+    color: aliceblue;
 }
 .NEditor .editarea {
     padding: 10px;
-}
-.NEditor .cursor {
-    animation: cursor 1s linear infinite;
-    background-color: black;
-    display: inline-block;
-    width: 1px;
-    height: 13px;
 }
 @keyframes cursor {
     0%,5%,65%,100% {
@@ -24,13 +19,17 @@
     }
 }
 .NEditor .addtext {
+    caret-color: rgb(242, 255, 242);
     font-family: inherit;
     font-size: inherit;
     font: inherit;
-    height: inherit;
     outline: none;
     border: none;
-    width: 1px;
-    padding: 0px;
+    background: red;
     background: none;
+    resize: none;
+    overflow: hidden;
+    width: 100px;
+    padding: 0px;
+    height: 15px;
 }
