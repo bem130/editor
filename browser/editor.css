@@ -13,6 +13,10 @@
     padding: 10px;
     height: 100%;
 }
+.NEditor .editarea .line {
+    height: 30px;
+    text-align: left;
+}
 .NEditor .addtext {
     caret-color: transparent;
     font-family: inherit;
@@ -26,7 +30,9 @@
     overflow: hidden;
     width: 2px;
     padding: 0px;
-    height: 25px;
+    margin: 0px;
+    margin-left: -2px;
+    height: 23px;
     opacity: 0;
 }
 .NEditor .infobar {
