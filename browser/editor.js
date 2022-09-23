@@ -1,16 +1,16 @@
 class NEditor {
     constructor() {
         this.lines = [""];
-        this.cursor = [1,0];
+        this.cursor = [1,1];
     }
     setText(text) {}
     addText(text) {
-        this.lines[this.cursor[0]-1] = this.lines[this.cursor[0]-1].slice(0,this.cursor[1])+text+this.lines[this.cursor[0]-1].slice(this.cursor[1]);
+        this.lines[this.cursor[0]-1] = this.lines[this.cursor[0]-1].slice(0,this.cursor[1]-1)+text+this.lines[this.cursor[0]-1].slice(this.cursor[1]-1);
         this.cursor[1]++;
     }
     deleteText() {
         if (this.cursor[1]>0) {
-            this.lines[this.cursor[0]-1] = this.lines[this.cursor[0]-1].slice(0,this.cursor[1]-1)+this.lines[this.cursor[0]-1].slice(this.cursor[1]);
+            this.lines[this.cursor[0]-1] = this.lines[this.cursor[0]-1].slice(0,this.cursor[1]-2)+this.lines[this.cursor[0]-1].slice(this.cursor[1]-1);
             this.cursor[1]--;
         }
     }
@@ -43,9 +43,9 @@ class NEditorUI {
         infobar.classList.add("infobar");
         {
             // cursor info
-            let infocursor = document.createElement("div");
-            infocursor.innerHTML = [this.editor.cursor[0],this.editor.cursor[1]];
-            infobar.appendChild(infocursor);
+            this.infocursor = document.createElement("div");
+            this.infocursor.innerHTML = [this.editor.cursor[0],this.editor.cursor[1]-1];
+            infobar.appendChild(this.infocursor);
         }
         this.ui.appendChild(infobar);
         this.updatelines();
@@ -53,6 +53,7 @@ class NEditorUI {
     addtext(e) {
         if( e.isComposing ) {
             this.composingtext.innerText = e.target.value;
+            this.infocursor.innerText = [this.editor.cursor[0],this.editor.cursor[1]+e.target.value.length];
             return;
         }
         else {
@@ -65,6 +66,7 @@ class NEditorUI {
         this.updatelines();
     }
     keyevent(e) {
+        console.log(e.keyCode)
         if (e.keyCode==8) {
             this.editor.deleteText();
             this.updatelines();
@@ -86,8 +88,8 @@ class NEditorUI {
         this.moveselector();
     }
     moveselector() {
-        console.log(this.editor.cursor)
-        let chars = document.querySelector(`.NEditor > div.editarea > div:nth-child(${this.editor.cursor[0]}) > span:nth-child(${this.editor.cursor[1]})`);
+        this.infocursor.innerText = this.editor.cursor;
+        let chars = document.querySelector(`.NEditor > div.editarea > div:nth-child(${this.editor.cursor[0]}) > span:nth-child(${this.editor.cursor[1]-1})`);
         if (chars==null) {
             chars = document.querySelector(`.NEditor > div.editarea > div:nth-child(${this.editor.cursor[0]})`);
         }
