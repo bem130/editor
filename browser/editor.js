@@ -31,8 +31,9 @@ class NEditorUI {
         this.editarea.classList.add("editarea");
         this.editarea.onclick = function() {this.addtextarea.focus()}.bind(this);
         this.ui.appendChild(this.editarea);
-        this.updatelines();
         // cursor
+        this.composingtext = document.createElement("span");
+        this.composingtext.classList.add("composing");
         this.addtextarea = document.createElement("textarea");
         this.addtextarea.classList.add("addtext");
         //this.addtextarea.onchange = this.addtext.bind(this);
@@ -47,12 +48,12 @@ class NEditorUI {
             infobar.appendChild(infocursor);
         }
         this.ui.appendChild(infobar);
-        this.moveselector();
+        this.updatelines();
     }
     addtext(e) {
         if( e.isComposing ) {
           console.log("未確定",e.target.value);
-          this.editor.composingText(e.target.value);
+          this.composingtext.innerText = e.target.value;
           return
         }
         else {
@@ -61,9 +62,9 @@ class NEditorUI {
                 this.editor.addText(e.target.value[i]);
             }
             e.target.value = "";
+            this.composingtext.innerText = "";
         }
         this.updatelines();
-        this.moveselector();
     }
     updatelines() {
         this.editarea.innerHTML = "";
@@ -78,6 +79,7 @@ class NEditorUI {
             }
             this.editarea.appendChild(lines);
         }
+        this.moveselector();
     }
     moveselector() {
         console.log(this.editor.cursor)
@@ -86,6 +88,7 @@ class NEditorUI {
             chars = document.querySelector(`.NEditor > div.editarea > div:nth-child(${this.editor.cursor[0]})`);
         }
         chars.after(this.addtextarea);
+        chars.after(this.composingtext);
         this.addtextarea.focus();
     }
     setui() {}

@@ -19,17 +19,16 @@
     }
 }
 .NEditor .addtext {
-    caret-color: rgb(242, 255, 242);
+    caret-color: transparent;
     font-family: inherit;
     font-size: inherit;
     font: inherit;
     outline: none;
     border: none;
     background: red;
-    background: none;
     resize: none;
     overflow: hidden;
-    width: 100px;
+    width: 10px;
     padding: 0px;
     height: 15px;
 }
