@@ -21,12 +21,16 @@ class NEditor {
         }
         return false;
     }
-    selectText(text) {}
+    selectText(text) {
+    }
 }
 class NEditorUI {
     constructor(editorarea) {
         this.editor = new NEditor();
         this.ui = editorarea;
+        this.beforekey = false;
+        this.nowkey = false;
+        this.startselect = 0;
         this.initalui();
     }
     initalui() {
@@ -72,7 +76,9 @@ class NEditorUI {
         this.updatelines();
     }
     keyevent(e) {
-        console.log(e.keyCode)
+        //console.log(e)
+        this.nowkey = e;
+
         if (e.keyCode==8) {
             this.editor.deleteText();
             this.updatelines();
@@ -84,15 +90,31 @@ class NEditorUI {
             }
         }
         if (e.keyCode==37) {
-            this.editor.moveCursor(-1);
+            if ((this.beforekey.keyCode==16)&&e.shiftKey) {
+                this.startselect = this.editor.cursor;
+            }
+            if (true) {
+                this.editor.moveCursor(-1);
+            }
             this.updatelines();
         }
         if (e.keyCode==39) {
-            this.editor.moveCursor(1);
+            if ((this.beforekey.keyCode==16)&&e.shiftKey) {
+                this.startselect = this.editor.cursor;
+            }
+            if (true) {
+                this.editor.moveCursor(1);
+            }
             this.updatelines();
         }
+
+        this.beforekey = e;
+
     }
     updatelines() {
+        let selecting = this.nowkey.shiftKey;
+        let startselection = Math.min(this.startselect,this.editor.cursor)-2;
+        let endselection = Math.max(this.startselect,this.editor.cursor)-1;
         this.editarea.innerHTML = "";
         let lines = document.createElement("div");
         let i = 0;
@@ -114,12 +136,16 @@ class NEditorUI {
                 let chars = document.createElement("span");
                 chars.classList.add("char");
                 chars.innerText = this.editor.text[i];
+                //console.log(selecting,startselection,endselection)
+                if (selecting&&startselection<i&&endselection>i) {
+                    chars.classList.add("selecting")
+                }
                 lines.appendChild(chars);
             }
         }
         this.infocursor.innerText = this.editor.cursor;
         this.addtextarea.focus();
-        console.log("updated")
+        //console.log("updated")
     }
     moveselector() {
         let chars = document.querySelector(`.NEditor > div.editarea span:nth-child(${this.editor.cursor-1})`);

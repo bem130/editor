@@ -23,6 +23,10 @@
 .NEditor .editarea .composing {
     text-decoration: underline;
 }
+.NEditor .editarea .selecting {
+    text-decoration: underline;
+    background-color: aquamarine;
+}
 .NEditor .addtext {
     caret-color: transparent;
     font-family: inherit;
