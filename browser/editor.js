@@ -100,11 +100,22 @@ class NEditorUI {
     moveselector() {
         this.infocursor.innerText = this.editor.cursor;
         let chars = document.querySelector(`.NEditor > div.editarea > div:nth-child(${this.editor.cursor[0]}) > span:nth-child(${this.editor.cursor[1]-1})`);
-        if (chars==null) {
-            chars = document.querySelector(`.NEditor > div.editarea > div:nth-child(${this.editor.cursor[0]})`);
+        if (chars!=null) {
+            chars.after(this.addtextarea);
+            chars.after(this.composingtext);
         }
-        chars.after(this.addtextarea);
-        chars.after(this.composingtext);
+        else {
+            chars = document.querySelector(`.NEditor > div.editarea > div:nth-child(${this.editor.cursor[0]}) > span:nth-child(${this.editor.cursor[1]})`);
+            if (chars!=null) {
+                chars.before(this.addtextarea);
+                chars.before(this.composingtext);
+            }
+            else {
+                chars = document.querySelector(`.NEditor > div.editarea > div:nth-child(${this.editor.cursor[0]})`);
+                chars.after(this.addtextarea);
+                chars.after(this.composingtext);
+            }
+        }
         this.addtextarea.focus();
     }
     setui() {}
