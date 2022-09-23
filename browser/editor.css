@@ -1,5 +1,6 @@
 .NEditor {
     font-family: monospace;
+    font-size: 20px;
     height: 300px;
     width: 500px;
     margin: 0px;
@@ -11,7 +12,6 @@
     padding: 10px;
 }
 .NEditor .addtext {
-    animation: cursor 1s linear infinite;
     caret-color: transparent;
     font-family: inherit;
     font-size: inherit;
@@ -24,7 +24,11 @@
     overflow: hidden;
     width: 2px;
     padding: 0px;
-    height: 15px;
+    height: 25px;
+    opacity: 0;
+}
+.NEditor .addtext:focus {
+    animation: cursor 1s linear infinite;
 }
 @keyframes cursor {
     0%,10%,65%,100% {
