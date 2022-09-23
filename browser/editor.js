@@ -14,7 +14,9 @@ class NEditor {
             this.cursor[1]--;
         }
     }
-    moveCursor(x,y) {}
+    moveCursor(l,c) {
+        this.cursor[1]+=c;
+    }
     selectText(text) {}
 }
 class NEditorUI {
@@ -69,6 +71,14 @@ class NEditorUI {
         console.log(e.keyCode)
         if (e.keyCode==8) {
             this.editor.deleteText();
+            this.updatelines();
+        }
+        if (e.keyCode==37) {
+            this.editor.moveCursor(0,-1);
+            this.updatelines();
+        }
+        if (e.keyCode==39) {
+            this.editor.moveCursor(0,1);
             this.updatelines();
         }
     }
