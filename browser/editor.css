@@ -10,12 +10,15 @@
     color: aliceblue;
 }
 .NEditor .editarea {
-    padding: 10px;
+    padding: 30px;
     height: 100%;
+    overflow: scroll;
 }
 .NEditor .editarea .line {
     height: 30px;
     text-align: left;
+    white-space: nowrap;
+    width: fit-content;
 }
 .NEditor .addtext {
     caret-color: transparent;
